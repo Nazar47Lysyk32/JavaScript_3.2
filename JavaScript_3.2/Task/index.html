@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Extended Date</title>
+</head>
+<body>
+    <div id="dateOutput"></div>
+
+    <script>
+        class ExtendedDate extends Date {
+            constructor(...args) {
+                super(...args);
+            }
+
+            formatDate() {
+                const months = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень',
+                                'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'];
+                return `${this.getDate()} ${months[this.getMonth()]}`;
+            }
+
+            isFutureOrCurrentDate() {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                return this >= today;
+            }
+
+            isLeapYear() {
+                const year = this.getFullYear();
+                return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            }
+
+            nextDate() {
+                const nextDay = new Date(this);
+                nextDay.setDate(this.getDate() + 1);
+                return nextDay;
+            }
+        }
